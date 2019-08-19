@@ -30,7 +30,7 @@ def get_parser():
                         help='batch_size for training')
     parser.add_argument('--num_workers', type=int, default=8,
                         help='num workers for data loading')
-    parser.add_argument('--root', type=str, default='/home/disk1/chengqinyuan/datasets',
+    parser.add_argument('--root', type=str, default='datasets',
                         help='location of data')
     parser.add_argument('--epochs', type=int, default=4000,
                         help='epochs for training')
