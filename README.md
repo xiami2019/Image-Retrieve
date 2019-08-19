@@ -37,6 +37,7 @@ python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_
 ```  
 # Result
 We can get results of two datasets after about 2000 epochs training:  
+
 Name | Academy | score 
 - | :-: | -: 
 Harry Potter | Gryffindor| 90 
