@@ -194,14 +194,11 @@ class categoryRandomSampler(Sampler):
         This sampler will sample numBatchCategory categories in each batch.
         """
         self.batch_size = batch_size
-        self.num_samples = len(targets)
+        self.sample_number = len(targets)
         self.numBatchCategory = numBatchCategory
-        self.num_categories = max(targets)
-        self.category_idxs = {}
-        self.categorys = list(range(1, self.num_categories+1))
-
-        for i in range(1, self.num_categories+1):
-            self.category_idxs[i] = []
+        self.num_categories = max(targets) + 1
+        self.category_idxs = {i:[] for i in range(self.num_categories)}
+        self.categorys = list(range(self.num_categories))
 
         for i in range(self.num_samples):
             self.category_idxs[int(targets[i])].append(i)
@@ -214,7 +211,6 @@ class categoryRandomSampler(Sampler):
             batch = []
             random.shuffle(self.categorys)
             categories_selcted = self.categorys[:self.numBatchCategory]
-            # categories_selcted = np.random.randint(self.num_categories, size=self.numBatchCategory)
 
             for j in categories_selcted:
                 random.shuffle(self.category_idxs[j])
@@ -223,8 +219,6 @@ class categoryRandomSampler(Sampler):
             random.shuffle(batch)
 
             selected.extend(batch)
-
-        # print('--------------------------------------------', countn / (countp + countn) * 1.0)
 
         return iter(torch.LongTensor(selected))
 
