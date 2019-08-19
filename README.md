@@ -11,7 +11,8 @@ This task can be uesd in many circumstances, such as Taobao's PaiLiTao. You can 
 As we use image feature map extracted by Convolutional Neural Networks, for the sake of saving image and calculating the similarity, we change the image feature maps to binary hash codes. So, we can use L2 or L1 norm to calculate the images' similarity efficiently. We usually use a activation function tanh or sigmoid to restrict the model's output. By the way, during training we use fraction to calculate loss value and during testing we change the output to bianry hash code.
 
 # Triplet Loss  
-Triplet loss can estimate 
+<a href="https://www.codecogs.com/eqnedit.php?latex=L_{triplet}(F(I),F(I^{&plus;}),F(I^{-}))&space;\\&space;=&space;max(0,\left&space;\|&space;F(I)-F(I^{&plus;})&space;\right&space;\|_{2}^{2}-\left&space;\|F(I)-F(I^{-})&space;\right&space;\|_{2}^{2}&plus;margin)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L_{triplet}(F(I),F(I^{&plus;}),F(I^{-}))&space;\\&space;=&space;max(0,\left&space;\|&space;F(I)-F(I^{&plus;})&space;\right&space;\|_{2}^{2}-\left&space;\|F(I)-F(I^{-})&space;\right&space;\|_{2}^{2}&plus;margin)" title="L_{triplet}(F(I),F(I^{+}),F(I^{-})) \\ = max(0,\left \| F(I)-F(I^{+}) \right \|_{2}^{2}-\left \|F(I)-F(I^{-}) \right \|_{2}^{2}+margin)" /></a>  
+Margin is hyperparameter determined by the hash code size.  
 
 # Requirements
 Python 3.6  
