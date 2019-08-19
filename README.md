@@ -48,3 +48,5 @@ Datasets | 16bits | 32bits | 48bits | 64bits
 `CUB Baseline` | 0.5173 | 0.6518 | 0.6807 | 0.6949
 `Stanford Dogs` | 0.6741 | 0.7029 | 0.7023 | 0.7123
 `Dogs Baseline` | **0.6745** | **0.7101** | **0.7252** | **0.7293**
+## Reference
+[1] Hanjiang Lai, Yan Pan, Ye Liu, Shuicheng Yan [*Simultaneous Feature Learning and Hash Coding with Deep Neural Networks*](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Lai_Simultaneous_Feature_Learning_2015_CVPR_paper.html)
