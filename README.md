@@ -40,7 +40,7 @@ Then you cun run the command:
 python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
 ```  
 ## Result
-I got results of `mAP` on two datasets after about 2000 epochs training:  
+Got results of `mAP` on two datasets after about 2000 epochs training:  
 
 Datasets | 16bits | 32bits | 48bits | 64bits
 |:---: |:---: |:---: | :---: |:---: |
