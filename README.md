@@ -11,7 +11,6 @@ This task can be uesd in many circumstances, such as Taobao's PaiLiTao. You can 
 As we use image feature map extracted by Convolutional Neural Networks, for the sake of saving image and calculating the similarity, we change the image feature maps to binary hash codes. So, we can use L2 or L1 norm to calculate the images' similarity efficiently. We usually use a activation function tanh or sigmoid to restrict the model's output. By the way, during training we use fraction to calculate loss value and during testing we change the output to bianry hash code.
 
 # Triplet Loss  
-$$\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$$  
 Triplet loss can estimate 
 
 # Requirements
