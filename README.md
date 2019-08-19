@@ -13,11 +13,16 @@ As we use image feature map extracted by Convolutional Neural Networks, for the 
 # Triplet Loss  
 <a href="https://www.codecogs.com/eqnedit.php?latex=L_{triplet}(F(I),F(I^{&plus;}),F(I^{-}))&space;\\&space;=&space;max(0,\left&space;\|&space;F(I)-F(I^{&plus;})&space;\right&space;\|_{2}^{2}-\left&space;\|F(I)-F(I^{-})&space;\right&space;\|_{2}^{2}&plus;margin)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L_{triplet}(F(I),F(I^{&plus;}),F(I^{-}))&space;\\&space;=&space;max(0,\left&space;\|&space;F(I)-F(I^{&plus;})&space;\right&space;\|_{2}^{2}-\left&space;\|F(I)-F(I^{-})&space;\right&space;\|_{2}^{2}&plus;margin)" title="L_{triplet}(F(I),F(I^{+}),F(I^{-})) \\ = max(0,\left \| F(I)-F(I^{+}) \right \|_{2}^{2}-\left \|F(I)-F(I^{-}) \right \|_{2}^{2}+margin)" /></a>  
 Margin is hyperparameter determined by the hash code size.  
+Triplet loss is able to decrease the distance between the similar images and increase the distance between dissimilar images.
+
+# Metric  
+In image retrieve task, we often use mAP(mean average precision) or precision/recall rate to estimate the model's performance. Here we use map as our metric.
+
 
 # Requirements
 Python 3.6  
 Pytorch 1.1.0  
 TensorboardX  
  
-# Network
+# Implemention
 This project use a pretrained Resnet18 to fine-tune on CUB_200_2011 and Stanford Dogs.
