@@ -1,8 +1,8 @@
 Image Retrieve
 =====
+By Xiami2019
 # Abstact  
 This project is an Image Retrieve model for CUB_200_2011 and Stanford Dogs dataset and can attain state of the art performance.  
-By XiaMi2019
 
 # Introduction  
 Image Retrieve is a prevail task of computer vision.
