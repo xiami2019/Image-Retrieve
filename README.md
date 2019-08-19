@@ -32,8 +32,8 @@ The optimizer part and log part is released by FAIR in their project https://git
 # Quick Start
 At first you should download the datasets by your self and unzip the datasets at correct position. Also I will later add a shell script to download datasets automaticly.
 Then you cun run the command:  
-'''Bash  
-python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'#Bash
-'''  
+```Bash  
+python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
+```  
 # Result
 We can get results of two datasets after about 2000 epochs training:
