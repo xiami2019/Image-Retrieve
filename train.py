@@ -18,12 +18,12 @@ def get_parser():
     Generate a parameters parse
     '''
     parser = argparse.ArgumentParser(description='CUB image retrieve')
-    parser.add_argument("--dump_path", type=str, default="./dumped/",
-                        help="Experiment dump path")
-    parser.add_argument("--exp_name", type=str, default="",
-                        help="Experiment name")
-    parser.add_argument("--exp_id", type=str, default="",
-                        help="Experiment ID")
+    parser.add_argument('--dump_path', type=str, default='./dumped/',
+                        help='Experiment dump path')
+    parser.add_argument('--exp_name', type=str, default='',
+                        help='Experiment name')
+    parser.add_argument('--exp_id', type=str, default='',
+                        help='Experiment ID')
     parser.add_argument('--dataset_name', type=str, default='CUB_200_2011',
                         help='dataset name (CUB_200_2011 or Stanford_Dogs)')
     parser.add_argument('--batch_size', type=int, default=100,
@@ -38,14 +38,18 @@ def get_parser():
                         help='decide to train or evaluate')
     parser.add_argument('--optimizer', type=str, default='adam_inverse_sqrt,beta1=0.9,beta2=0.98,lr=0.001',
                         help='choose which optimizer to use')
-    parser.add_argument("--clip_grad_norm", type=float, default=5,
-                        help="Clip gradients norm (0 to disable)")
-    parser.add_argument("--code_size", type=int, default=32,
-                        help="size of binary code")
-    parser.add_argument("--load_model", type=str, default='',
-                        help="location of saved model")
-    parser.add_argument("--triplet_margin", type=int, default=8,
-                        help="margin when calculate triplet loss")
+    parser.add_argument('--clip_grad_norm', type=float, default=5,
+                        help='Clip gradients norm (0 to disable)')
+    parser.add_argument('--code_size', type=int, default=32,
+                        help='size of binary code')
+    parser.add_argument('--load_model', type=str, default='',
+                        help='location of saved model')
+    parser.add_argument('--triplet_margin', type=int, default=8,
+                        help='margin when calculate triplet loss')
+    parser.add_argument('--category_sampler', type=bool_flag, default=False,
+                        help='Whether to use category sampler when combine triplet')
+    parser.add_argument('--category_number', type=int, default=0,
+                        help='number of category when use category sampler')
 
     
     return parser
@@ -64,15 +68,34 @@ def main(params):
     else:
         logger.info('Dataset %s does not exsist.' % params.dataset_name)
 
-    logger.info('loading %s dataset' % params.dataset_name)
-    dataloaders = {
-        'train': DataLoader(dataset(params.root, if_train=True), batch_size=params.batch_size,
-                            shuffle=True, num_workers=params.num_workers),
-        'test': DataLoader(dataset(params.root, if_train=False), batch_size=params.batch_size,
-                           shuffle=False, num_workers=params.num_workers),
-        'database': DataLoader(dataset(params.root, if_train=True, if_database=True), batch_size=params.batch_size,
-                            shuffle=False, num_workers=params.num_workers)
-    }
+    logger.info('Loading %s dataset' % params.dataset_name)
+    if params.category_sampler:
+        assert params.category_number > 0
+        temp_dataset = dataset(params.root, if_train=True)
+        all_targets = []
+        temp_dataloader = DataLoader(dataset(params.root, if_train=True), batch_size=params.batch_size,
+                                shuffle=True, num_workers=params.num_workers)
+        for _, labels in temp_dataloader:
+            all_targets.extend(labels)
+        logger.info('Generating sampler')
+        category_sampler = categoryRandomSampler(params.category_number, all_targets, params.batch_size)
+        dataloaders = {
+            'train': DataLoader(dataset(params.root, if_train=True), batch_size=params.batch_size,
+                                shuffle=False, num_workers=params.num_workers, sampler=category_sampler),
+            'test': DataLoader(dataset(params.root, if_train=False), batch_size=params.batch_size,
+                            shuffle=False, num_workers=params.num_workers),
+            'database': DataLoader(dataset(params.root, if_train=True, if_database=True), batch_size=params.batch_size,
+                                shuffle=False, num_workers=params.num_workers)
+        }
+    else:
+        dataloaders = {
+            'train': DataLoader(dataset(params.root, if_train=True), batch_size=params.batch_size,
+                                shuffle=True, num_workers=params.num_workers),
+            'test': DataLoader(dataset(params.root, if_train=False), batch_size=params.batch_size,
+                            shuffle=False, num_workers=params.num_workers),
+            'database': DataLoader(dataset(params.root, if_train=True, if_database=True), batch_size=params.batch_size,
+                                shuffle=False, num_workers=params.num_workers)
+        }
 
     #create neural network
     training_network = RetrievalModel(params=params)
@@ -131,7 +154,7 @@ def main(params):
         train_binary, train_label = cal_result(dataloaders['database'], training_network, params)
         test_binary, test_label = cal_result(dataloaders['test'], training_network, params)
         mAP = compute_mAP(train_binary, test_binary, train_label, test_label)
-        logger.info("mAP: %f" % mAP)
+        logger.info('mAP: %f' % mAP)
     
     writer.close()
 

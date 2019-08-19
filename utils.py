@@ -200,11 +200,11 @@ class categoryRandomSampler(Sampler):
         self.category_idxs = {i:[] for i in range(self.num_categories)}
         self.categorys = list(range(self.num_categories))
 
-        for i in range(self.num_samples):
+        for i in range(self.sample_number):
             self.category_idxs[int(targets[i])].append(i)
 
     def __iter__(self):
-        num_batches = self.num_samples // self.batch_size
+        num_batches = self.sample_number // self.batch_size
         selected = []
 
         for i in range(num_batches):
@@ -217,10 +217,9 @@ class categoryRandomSampler(Sampler):
                 batch.extend(self.category_idxs[j][:int(self.batch_size // self.numBatchCategory)])
 
             random.shuffle(batch)
-
             selected.extend(batch)
 
         return iter(torch.LongTensor(selected))
 
     def __len__(self):
-        return self.num_samples
+        return self.sample_number
