@@ -18,11 +18,19 @@ Triplet loss is able to decrease the distance between the similar images and inc
 # Metric  
 In image retrieve task, we often use mAP(mean average precision) or precision/recall rate to estimate the model's performance. Here we use map as our metric.
 
-
 # Requirements
 Python 3.6  
 Pytorch 1.1.0  
 TensorboardX  
  
 # Implemention
-This project use a pretrained Resnet18 to fine-tune on CUB_200_2011 and Stanford Dogs.
+This project use a pretrained Resnet18 to fine-tune.
+The optimizer part and log part is released by FAIR in their project https://github.com/facebookresearch/XLM.
+
+# Quick Start
+At first you should download the datasets by your self and unzip the datasets at correct position. Also I will later add a shell script to download datasets automaticly.
+Then you cun run the command:
+python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
+
+# Result
+We can get results of two datasets after about 2000 epochs training:
