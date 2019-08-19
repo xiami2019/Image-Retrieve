@@ -38,8 +38,7 @@ python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_
 # Result
 We can get results of two datasets after about 2000 epochs training:  
 
-Name | Academy | score  
-- | :-: | -:  
-Harry Potter | Gryffindor| 90  
-Hermione Granger | Gryffindor | 100  
-Draco Malfoy | Slytherin | 90  
+Model | Score | CoLA | SST2 | MRPC | STS-B | QQP | MNLI_m | MNLI_mm | QNLI | RTE | WNLI | AX
+|:---: |:---: |:---: | :---: |:---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+`BERT` | 80.5 | 60.5 | 94.9 | 89.3/85.4 | 87.6/86.5 | 72.1/89.3 | 86.7 | 85.9 | 92.7 | 70.1 | 65.1 | 39.6
+`XLM_en` | **82.8** | **62.9** | **95.6** | **90.7/87.1** | **88.8/88.2** | **73.2/89.8** | **89.1** | **88.5** | **94.0** | **76.0** | **71.9** | **44.7**
