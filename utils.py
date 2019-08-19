@@ -108,6 +108,7 @@ def bool_flag(s):
 def combination(iterable, r):
     pool = list(iterable)
     n = len(pool)
+
     for indices in itertools.permutations(range(n), r):
         if sorted(indices) == list(indices):
             yield list(pool[i] for i in indices)
@@ -116,6 +117,7 @@ def combination(iterable, r):
 def get_triplets(labels):
     labels = labels.cpu().data.numpy()
     triplets = []
+
     for label in set(labels):
         label_mask = (labels == label)
         label_indices = np.where(label_mask)[0]
@@ -149,11 +151,13 @@ def triplet_hashing_loss(image_embedding, image_labels, margin=1):
 def cal_result(data_loarder, model, params):
     binary_code = []
     labels = []
+
     with torch.no_grad():
         for image, label in data_loarder:
             labels.append(label)
             output = model(image.cuda())
             binary_code.append(output.data.cpu())
+
     return torch.sign(torch.cat(binary_code)), torch.cat(labels)
 
 def compute_mAP(trn_binary, tst_binary, trn_label, tst_label):
@@ -166,33 +170,43 @@ def compute_mAP(trn_binary, tst_binary, trn_label, tst_label):
     AP = []
     Ns = torch.arange(1, trn_binary.size(0) + 1)
     Ns = Ns.type(torch.FloatTensor)
+
     for i in range(tst_binary.size(0)):
         query_label, query_binary = tst_label[i], tst_binary[i]
         _, query_result = torch.sum((query_binary != trn_binary).long(), dim=1).sort()
         correct = (query_label == trn_label[query_result]).float()
         P = torch.cumsum(correct.type(torch.FloatTensor), dim=0) / Ns
         AP.append(torch.sum(P * correct) / torch.sum(correct))
+    
     mAP = torch.mean(torch.Tensor(AP))
     return mAP
 
 def save_model(model, save_path):
+    '''
+    save model
+    '''
     model.save(save_path)
 
 def load_model(model, save_path):
+    '''
+    load model
+    '''
     model.load(save_path)
 
 def optimize(optimizer, parameters, params, loss):
     optimizer.zero_grad()
     loss.backward()
+
     if params.clip_grad_norm > 0:
         clip_grad_norm_(parameters, params.clip_grad_norm)
+    
     optimizer.step()
 
 class categoryRandomSampler(Sampler):
+    '''
+    This sampler will sample numBatchCategory categories in each batch
+    '''
     def __init__(self, numBatchCategory, targets, batch_size):
-        """
-        This sampler will sample numBatchCategory categories in each batch.
-        """
         self.batch_size = batch_size
         self.sample_number = len(targets)
         self.numBatchCategory = numBatchCategory

@@ -25,6 +25,7 @@ class CUB_200_2011(Dataset):
         self.test_index = []
         self.index2imgname = []
         self.index2label = []
+
         with open(os.path.join(root, 'train_test_split.txt'), 'r', encoding='utf-8') as f:
             for line in f.readlines():
                 line = list(line.strip('\n').split())
@@ -47,6 +48,9 @@ class CUB_200_2011(Dataset):
         assert len(self.train_index) == 5994
         assert len(self.test_index) == 5794
         assert len(self.index2label) == len(self.index2imgname) == 5994 + 5794
+
+        # transforms.RandomPerspective(),
+        # transforms.RandomGrayscale(),
 
         if self.if_train is True and self.if_database is False:
             self.transforms = transforms.Compose([
@@ -94,6 +98,7 @@ class Stanford_Dog(Dataset):
         self.root = root
         self.if_train = if_train
         self.if_database = if_database
+        
         if self.if_train:
             self.images = [image[0][0] for image in loadmat(os.path.join(root, 'train_list.mat'))['file_list']]
             self.labels = [(int(image[0]) - 1) for image in loadmat(os.path.join(root, 'train_list.mat'))['labels']]

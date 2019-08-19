@@ -77,6 +77,7 @@ def main(params):
                                 shuffle=True, num_workers=params.num_workers)
         for _, labels in temp_dataloader:
             all_targets.extend(labels)
+
         logger.info('Generating sampler')
         category_sampler = categoryRandomSampler(params.category_number, all_targets, params.batch_size)
         dataloaders = {
@@ -110,22 +111,26 @@ def main(params):
     if params.eval_only is False:
         logger.info('Start Training')
         max_map = 0
+
         for epoch in range(params.epochs):
             training_network.train()
             total_batches = len(dataloaders['train'])
             logger.info('============ Starting epoch %i ... ============' % epoch)
             count = 0
             total_loss = 0
+            
             for index, (images, labels) in enumerate(dataloaders['train']):
                 optimizer.zero_grad()
                 images = images.cuda()
                 labels = labels.cuda()
                 images.requires_grad = True
+                
                 image_embeddings = training_network(images)
                 triplet_loss = triplet_hashing_loss(image_embeddings, labels, margin=params.triplet_margin)
                 logger.info('Batch %i/%i: loss: %f' % (index + 1, total_batches, triplet_loss.item()))
                 total_loss += triplet_loss.item()
                 count +=1 
+
                 writer.add_scalar('train', triplet_loss.item(), index + epoch * params.batch_size)
                 triplet_loss.backward()
                 optimizer.step()
@@ -137,22 +142,26 @@ def main(params):
                 training_network.eval()
                 train_binary, train_label = cal_result(dataloaders['database'], training_network, params)
                 test_binary, test_label = cal_result(dataloaders['test'], training_network, params)
+                
                 mAP = compute_mAP(train_binary, test_binary, train_label, test_label)
                 mAP = float(mAP)
                 logger.info('mAP: %f' % mAP)
                 if mAP > max_map:
                     max_map = mAP
                     save_model(training_network, params.save_best)
+                
                 save_model(training_network, params.save_path)
             logger.info('\nEpoch %i: avg loss: %f\n' % (epoch, total_loss / count))
     
     if params.eval_only:
         logger.info('Start Testing')
         assert os.path.isfile(params.load_model)
+        
         load_model(training_network, params.load_model)
         training_network.eval()
         train_binary, train_label = cal_result(dataloaders['database'], training_network, params)
         test_binary, test_label = cal_result(dataloaders['test'], training_network, params)
+        
         mAP = compute_mAP(train_binary, test_binary, train_label, test_label)
         logger.info('mAP: %f' % mAP)
     
