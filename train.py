@@ -42,7 +42,7 @@ def get_parser():
                         help="Clip gradients norm (0 to disable)")
     parser.add_argument("--code_size", type=int, default=32,
                         help="size of binary code")
-    parser.add_argument("--load_model", type=str, default='Best_model_map.pth',
+    parser.add_argument("--load_model", type=str, default='',
                         help="location of saved model")
     parser.add_argument("--triplet_margin", type=int, default=8,
                         help="margin when calculate triplet loss")
