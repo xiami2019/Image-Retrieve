@@ -1,3 +1,5 @@
+Image Retrieve
+=====
 # Abstact  
 This project is an Image Retrieve model for CUB_200_2011 and Stanford Dogs dataset and can attain state of the art performance.  
 The author is XiaMi2019
@@ -29,8 +31,9 @@ The optimizer part and log part is released by FAIR in their project https://git
 
 # Quick Start
 At first you should download the datasets by your self and unzip the datasets at correct position. Also I will later add a shell script to download datasets automaticly.
-Then you cun run the command:
-python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
-
+Then you cun run the command:  
+'''Bash  
+python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'#Bash
+'''  
 # Result
 We can get results of two datasets after about 2000 epochs training:
