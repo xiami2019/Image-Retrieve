@@ -13,13 +13,14 @@ class CUB_200_2011(Dataset):
     '''
     CUB_200_2011 Dataset for image retrieval
     '''
-    def __init__(self, root, if_train):
+    def __init__(self, root, if_train, if_database=False):
         '''
         file: data root.
         if_train: to identify train set of test set.
         '''
         self.root = root
         self.if_train = if_train
+        self.if_database = if_database
         self.train_index = []
         self.test_index = []
         self.index2imgname = []
@@ -47,7 +48,7 @@ class CUB_200_2011(Dataset):
         assert len(self.test_index) == 5794
         assert len(self.index2label) == len(self.index2imgname) == 5994 + 5794
 
-        if if_train:
+        if self.if_train is True and self.if_database is False:
             self.transforms = transforms.Compose([
                             transforms.Resize(256),
                             transforms.RandomCrop(224),
@@ -85,13 +86,14 @@ class Stanford_Dog(Dataset):
     '''
     Stanford_Dog Dataset for image retrieval
     '''
-    def __init__(self, root, if_train):
+    def __init__(self, root, if_train, if_database=False):
         '''
         file: data root.
         if_train: to identify train set of test set.
         '''
         self.root = root
         self.if_train = if_train
+        self.if_database = if_database
         if self.if_train:
             self.images = [image[0][0] for image in loadmat(os.path.join(root, 'train_list.mat'))['file_list']]
             self.labels = [(int(image[0]) - 1) for image in loadmat(os.path.join(root, 'train_list.mat'))['labels']]
@@ -104,7 +106,7 @@ class Stanford_Dog(Dataset):
         else:
             assert len(self.images) == len(self.labels) == 8580
 
-        if self.if_train:
+        if self.if_train is True and self.if_database is False:
             self.transforms = transforms.Compose([
                             transforms.Resize(256),
                             transforms.RandomCrop(224),
@@ -132,12 +134,7 @@ class Stanford_Dog(Dataset):
         return image, label
 
 if __name__ == '__main__':
-    # train_set = CUB_200_2011('/home/disk1/chengqinyuan/datasets/CUB_200_2011', if_train=True)   
-    # for i in range(10):
-    #     image, label = train_set[i]
-    #     print(image.size())
-
-    train_set = Stanford_Dog('/home/disk1/chengqinyuan/datasets/Stanford_Dogs', True)
+    train_set = Stanford_Dog('datasets/Stanford_Dogs', True)
     print(len(train_set))
     for i in range(101):
         image, label = train_set[i]

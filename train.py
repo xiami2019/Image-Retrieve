@@ -70,7 +70,7 @@ def main(params):
                             shuffle=True, num_workers=params.num_workers),
         'test': DataLoader(dataset(params.root, if_train=False), batch_size=params.batch_size,
                            shuffle=False, num_workers=params.num_workers),
-        'database': DataLoader(dataset(params.root, if_train=True), batch_size=params.batch_size,
+        'database': DataLoader(dataset(params.root, if_train=True, if_database=True), batch_size=params.batch_size,
                             shuffle=False, num_workers=params.num_workers)
     }
 
