@@ -40,5 +40,7 @@ We can get results of two datasets after about 2000 epochs training:
 
 Datasets | 16bits | 32bits | 48bits | 64bits
 |:---: |:---: |:---: | :---: |:---: |
-`CUB_200_2011` | 80.5 | 60.5 | 94.9 | 89.3/85.4
+`CUB_200_2011` | **0.6560** | **0.6911** | **0.6941** | **0.6958**
+`CUB Baseline` | 0.5173 | 0.6518 | 0.6807 | 0.6958
 `Stanford Dogs` | 82.8 | 62.9 | 95.6 | 90.7/87.1
+`Dogs Baseline` | **0.6745** | **0.7101** | **0.7252** | **0.7293**
