@@ -36,11 +36,11 @@ Then you cun run the command:
 python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
 ```  
 # Result
-We can get results of two datasets after about 2000 epochs training:  
+We can get results of `mAP` on two datasets after about 2000 epochs training:  
 
 Datasets | 16bits | 32bits | 48bits | 64bits
 |:---: |:---: |:---: | :---: |:---: |
 `CUB_200_2011` | **0.6560** | **0.6911** | **0.6941** | **0.6958**
 `CUB Baseline` | 0.5173 | 0.6518 | 0.6807 | 0.6958
-`Stanford Dogs` | 82.8 | 62.9 | 95.6 | 90.7/87.1
+`Stanford Dogs` | 0.6741 | 0.7029 | 0.7023 | 0.7123
 `Dogs Baseline` | **0.6745** | **0.7101** | **0.7252** | **0.7293**
