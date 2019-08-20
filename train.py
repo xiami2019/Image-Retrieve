@@ -106,7 +106,6 @@ def main(params):
     optimizer = get_optimizer(training_network.parameters(), params.optimizer)
     # optimizer = torch.optim.Adam(training_network.parameters())
     # optimizer = torch.optim.SGD(training_network.parameters(), lr=0.001, momentum=0.9)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1)
 
     if params.eval_only is False:
         logger.info('Start Training')
@@ -134,7 +133,6 @@ def main(params):
                 writer.add_scalar('train', triplet_loss.item(), index + epoch * params.batch_size)
                 triplet_loss.backward()
                 optimizer.step()
-                scheduler.step()
             logger.info('============ End of epoch %i ============' % epoch)
             
             if epoch % 100 == 0:
