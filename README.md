@@ -42,7 +42,7 @@ Then you cun run the command:
 python train.py --exp_name 'CUB_32' --code_size 32 --triplet_margin 8 --dataset_name 'CUB_200_2011'
 ```  
 ## Result
-Got results of `mAP` on two datasets after about 1000~4000 epochs training(Best model appeared at differeny epoch for different code size):  
+Got results of `mAP` on two datasets after about 1000~4000 epochs training(Best model appeared at different epoch for different code size):  
 
 Datasets | 16bits | 32bits | 48bits | 64bits
 |:---: |:---: |:---: | :---: |:---: |
