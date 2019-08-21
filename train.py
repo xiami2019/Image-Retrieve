@@ -135,7 +135,7 @@ def main(params):
                 optimizer.step()
             logger.info('============ End of epoch %i ============' % epoch)
             
-            if epoch % 100 == 0:
+            if epoch % 100 == 0 or epoch == params.epoch - 1:
                 #caculate map
                 training_network.eval()
                 train_binary, train_label = cal_result(dataloaders['database'], training_network, params)
