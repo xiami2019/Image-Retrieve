@@ -51,4 +51,6 @@ Datasets | 16bits | 32bits | 48bits | 64bits
 `Stanford Dogs` | **0.6883** | 0.7049 | 0.7106 | 0.7123
 `Dogs Baseline` | 0.6745 | **0.7101** | **0.7252** | **0.7293**
 ## Reference
-[1] Hanjiang Lai, Yan Pan, Ye Liu, Shuicheng Yan [*Simultaneous Feature Learning and Hash Coding with Deep Neural Networks*](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Lai_Simultaneous_Feature_Learning_2015_CVPR_paper.html)
+[1] Hanjiang Lai, Yan Pan, Ye Liu, Shuicheng Yan [*Simultaneous Feature Learning and Hash Coding with Deep Neural Networks*](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Lai_Simultaneous_Feature_Learning_2015_CVPR_paper.html)  
+[2] Hanjiang Lai, Jikai Chen, Libing Geng, Yan Pan, Xiaodan Liang, Jian Yin [*Improving Deep Binary Embedding Networks by
+Order-aware Reweighting of Triplets*](https://ieeexplore.ieee.org/abstract/document/8640819)
