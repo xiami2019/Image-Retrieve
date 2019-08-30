@@ -47,9 +47,7 @@ Got results of `mAP` on two datasets after about 1000~4000 epochs training(Best 
 Datasets | 16bits | 32bits | 48bits | 64bits
 |:---: |:---: |:---: | :---: |:---: |
 `CUB_200_2011` | **0.6560** | **0.6911** | **0.6941** | **0.7047**
-`CUB Baseline` | 0.5173 | 0.6518 | 0.6807 | 0.6949
-`Stanford Dogs` | **0.6883** | 0.7049 | 0.7106 | 0.7123
-`Dogs Baseline` | 0.6745 | **0.7101** | **0.7252** | **0.7293**
+`Stanford Dogs` | **0.6883** | **0.7049** | **0.7106** | **0.7123**
 ## Reference
 [1] Hanjiang Lai, Yan Pan, Ye Liu, Shuicheng Yan [*Simultaneous Feature Learning and Hash Coding with Deep Neural Networks*](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Lai_Simultaneous_Feature_Learning_2015_CVPR_paper.html)  
 [2] Hanjiang Lai, Jikai Chen, Libing Geng, Yan Pan, Xiaodan Liang, Jian Yin [*Improving Deep Binary Embedding Networks by
