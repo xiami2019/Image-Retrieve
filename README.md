@@ -30,7 +30,7 @@ I use the online methods to get triplets and also online methods to calculate **
 At the model's output, I use a tanh activation function to restrict the output to [-1, 1].  
 When convert the model's output to binary hash code, I use `-1` to replace the code `0` and simply convert all the negative value to `-1` and all the positive value to `1`.  
 I use Euclidean distance to present the similarities between images.  
-The optimizer part is and the logger part is released by FAIR in their project https://github.com/facebookresearch/XLM.
+The optimizer part and the logger part are released by FAIR in their project https://github.com/facebookresearch/XLM.
 The optimizer is **AdamInverseSqrtWithWarmup**, which can decay the LR based on the inverse square root of the update number and also support a warmup phase.  
 For retrieve task, following the official setting, I use the train set as the retrieve database and the test set as query images.  
 
