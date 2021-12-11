@@ -1,4 +1,4 @@
 dumped
-datasets/*
-datasets/*
+datasets/Stanford_Dogs
+datasets/CUB_200_2011
 vit_checkpoint/ViT-B_32.npz
