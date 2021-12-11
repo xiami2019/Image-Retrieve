@@ -25,7 +25,7 @@ Python 3.6
 Pytorch 1.1.0  
  
 ## Implemention Detials
-This project use a pretrained Resnet18 changed the last full connection layer to fine-tune and Adam_inverse_sqrt algorithm to optimize.   
+This project use a pretrained Resnet18 or a pretrained Vision Transformer changed the last full connection layer to fine-tune and Adam_inverse_sqrt algorithm to optimize.   
 I use the online methods to get triplets and also online methods to calculate **mAP**.  
 At the model's output, I use a tanh activation function to restrict the output to [-1, 1].  
 When convert the model's output to binary hash code, I use `-1` to replace the code `0` and simply convert all the negative value to `-1` and all the positive value to `1`.  
