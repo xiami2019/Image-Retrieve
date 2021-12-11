@@ -1,3 +1,4 @@
 dumped
 datasets/*
-vit_checkpoint/*
+datasets/*
+vit_checkpoint/ViT-B_32.npz

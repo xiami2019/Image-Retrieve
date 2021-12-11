@@ -1,0 +1,1 @@
+pretrained vit: https://storage.googleapis.com/vit_models/imagenet21k%2Bimagenet2012/ViT-B_32.npz
